@@ -10,41 +10,49 @@
 <body>
     <header>
 
-    <main>
-        <section id="profile" aria-labelledby="profile-title">
-            <h2 id="profile-title">Seu perfil</h2>
+        <main>
+            <section id="profile" aria-labelledby="profile-title">
+                <h2 id="profile-title">Seu perfil</h2>
 
-            <form id="form-profile" novalidate>
-                <div class="campo">
-                    <label for="name">Nome</label>
-                    <input type="text" id="name" name="name" required />
-                    <span class="error" id="error-name" role="alert"></span>
-                </div>
+                <form id="form-profile" novalidate>
+                    <div class="campo">
+                        <label for="name">Nome</label>
+                        <input type="text" id="name" name="name" required />
+                        <span class="error" id="error-name" role="alert"></span>
+                    </div>
 
-                <div class="campo">
-                    <label for="area">Área de interesse</label>
-                    <input type="text" id="area" name="area" required />
-                    <span class="error" id="error-area" role="alert"></span>
-                </div>
+                    <div class="campo">
+                        <label for="area">Área de interesse</label>
+                        <input type="text" id="area" name="area" required />
+                        <span class="error" id="error-area" role="alert"></span>
+                    </div>
 
-                <div class="campo">
-                    <label for="skills">Habilidades (separadas por vírgula)</label>
-                    <input type="text" id="skills" name="skills" required placeholder="Ex: JavaScript, HTML, CSS" />
-                    <span class="error" id="error-skills" role="alert"></span>
-                </div>
+                    <div class="campo">
+                        <label for="skills">Habilidades (separadas por vírgula)</label>
+                        <input type="text" id="skills" name="skills" required placeholder="Ex: JavaScript, HTML, CSS" />
+                        <span class="error" id="error-skills" role="alert"></span>
+                    </div>
 
-                <div class="campo">
-                    <label for="experience">Tempo de experiência (em meses)</label>
-                    <input type="number" id="experience" name="experience" min="0" required />
-                    <span class="error" id="error-experience" role="alert"></span>
-                </div>
+                    <div class="campo">
+                        <label for="experience">Tempo de experiência (em meses)</label>
+                        <input type="number" id="experience" name="experience" min="0" required />
+                        <span class="error" id="error-experience" role="alert"></span>
+                    </div>
 
-                <button type="submit">Analisar a compatibilidade</button>
-            </form>
-        </section>
-    </main>
+                    <button type="submit">Analisar a compatibilidade</button>
+                </form>
+            </section>
 
-    <script type="module" src="./assets/scripts/main.js"></script>
+            <section id="results" aria-labelledby="results-title">
+                <h2 id="results-title">Resultado da análise</h2>
+                <p id="status" aria-live="polite"></p>
+                <div id="best-job"></div>
+                <div id="jobs-list"></div>
+            </section>
+
+        </main>
+
+        <script type="module" src="./assets/scripts/main.js"></script>
 </body>
 
 </html>
