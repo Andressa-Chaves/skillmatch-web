@@ -1,5 +1,5 @@
-<!doctype html>
-<html lang="pr-BR">
+<!DOCTYPE html>
+<html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8" />
@@ -8,12 +8,14 @@
 </head>
 
 <body>
+    <header>
+
     <main>
         <section id="profile" aria-labelledby="profile-title">
             <h2 id="profile-title">Seu perfil</h2>
 
             <form id="form-profile" novalidate>
-                <div class="field">
+                <div class="campo">
                     <label for="name">Nome</label>
                     <input type="text" id="name" name="name" required />
                     <span class="error" id="error-name" role="alert"></span>
@@ -26,14 +28,13 @@
                 </div>
 
                 <div class="campo">
-                    <label for="habilidades">Habilidades</label>
-                    <input type="text" id="skills" name="skills" required
-                    placeholder="Ex: JavaScript, HTML, CSS" />
+                    <label for="skills">Habilidades (separadas por vírgula)</label>
+                    <input type="text" id="skills" name="skills" required placeholder="Ex: JavaScript, HTML, CSS" />
                     <span class="error" id="error-skills" role="alert"></span>
                 </div>
 
                 <div class="campo">
-                    <label for="experiencia">Tempo de experiência (em meses)</label>
+                    <label for="experience">Tempo de experiência (em meses)</label>
                     <input type="number" id="experience" name="experience" min="0" required />
                     <span class="error" id="error-experience" role="alert"></span>
                 </div>
@@ -43,7 +44,7 @@
         </section>
     </main>
 
-    <script type="module" src="./scripts/main.js"></script>
+    <script type="module" src="./assets/scripts/main.js"></script>
 </body>
 
 </html>
