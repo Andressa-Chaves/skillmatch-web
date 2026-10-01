@@ -7,7 +7,7 @@ export class Job {
     this.wage = wage;
     this.modality = modality;
   }
-  calcularCompatibilidade(skills) {
+  calculateCompatibility(skills) {
     const skillsLower = skills.map((skill) => skill.toLowerCase());
     const isFound = (req) => skillsLower.includes(req.toLowerCase());
 
@@ -20,24 +20,24 @@ export class Job {
     return { percentage, found, missing };
   }
 
-  rotulo() {
+  label() {
     return `${this.role} - ${this.business}`;
   }
 }
 export class JobFrontEnd extends Job {
-  constructor(dados) {
-    super(dados);
+  constructor(data) {
+    super(data);
     this.stack = this.requirements.includes("React")
       ? "React"
       : "JavaScript puro";
   }
 
-  rotulo() {
-    return `${super.rotulo()} (${this.stack})`;
+  label() {
+    return `${super.label()} (${this.stack})`;
   }
 }
 
-export function classificar(percentage) {
+export function classify(percentage) {
   if (percentage >= 80) {
     return "Alta";
   } else if (percentage >= 50) {
@@ -47,7 +47,7 @@ export function classificar(percentage) {
   }
 }
 
-export function criarContador() {
+export function createCounter() {
   let total = 0;
   return function () {
     total += 1;
@@ -55,9 +55,9 @@ export function criarContador() {
   };
 }
 
-const contarAnalise = criarContador();
+const provideAnalysis = createCounter();
 
-export function gerarRecomendacao(results) {
+export function generateRecommendation(results) {
   const counts = {};
 
   for (const result of results) {
@@ -69,7 +69,7 @@ export function gerarRecomendacao(results) {
   const ranking = Object.entries(counts).sort((a, b) => b[1] - a[1]);
 
   if (ranking.length === 0) {
-    return "Você atende a todos os requisitos das vagas. Bom trabalho!";
+    return "Você atende a todos os requisitos das vagas. Parabéns!";
   }
 
   const top = ranking
@@ -80,4 +80,49 @@ export function gerarRecomendacao(results) {
     .join(", ");
 
   return `Para aumentar sua compatibilidade, estude primeiro: ${top}.`;
+}
+
+export function jobAnalyze(applicant, jobs, onComplete) {
+    const results = jobs.map((job) => {
+        const { percentage, found, missing } = job.calculateCompatibility(
+            applicant.skills
+        );
+        return {
+            job,
+            percentage,
+            found,
+            missing,
+            level: classify(percentage),
+        };
+    });
+ 
+    if (results.length === 0) {
+        return { results, best: null, recommendation: "", analysisNumber: 0 };
+    }
+ 
+    const best = results.reduce((top, current) => {
+        if (current.percentage > top.percentage) {
+            return current;
+        }
+        if (
+            current.percentage === top.percentage &&
+            current.missing.length < top.missing.length
+        ) {
+            return current;
+        }
+        return top;
+    });
+ 
+    const analysis = {
+        results,
+        best,
+        recommendation: generateRecommendation(results),
+        analysisNumber: provideAnalysis(),
+    };
+ 
+    if (typeof onComplete === "function") {
+        onComplete(analysis);
+    }
+ 
+    return analysis;
 }
