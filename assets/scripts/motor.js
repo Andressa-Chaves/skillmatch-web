@@ -38,11 +38,46 @@ export class JobFrontEnd extends Job {
 }
 
 export function classificar(percentage) {
-    if (percentage >= 80) {
-        return "Alta";
-    } else if (percentage >= 50) {
-        return "Média";
-    } else {
-        return "Baixa";
+  if (percentage >= 80) {
+    return "Alta";
+  } else if (percentage >= 50) {
+    return "Média";
+  } else {
+    return "Baixa";
+  }
+}
+
+export function criarContador() {
+  let total = 0;
+  return function () {
+    total += 1;
+    return total;
+  };
+}
+
+const contarAnalise = criarContador();
+
+export function gerarRecomendacao(results) {
+  const counts = {};
+
+  for (const result of results) {
+    for (const skill of result.missing) {
+      counts[skill] = (counts[skill] || 0) + 1;
     }
+  }
+
+  const ranking = Object.entries(counts).sort((a, b) => b[1] - a[1]);
+
+  if (ranking.length === 0) {
+    return "Você atende a todos os requisitos das vagas. Bom trabalho!";
+  }
+
+  const top = ranking
+    .slice(0, 2)
+    .map(
+      ([skill, qty]) => `${skill} (falta em ${qty} de ${results.length} vagas)`,
+    )
+    .join(", ");
+
+  return `Para aumentar sua compatibilidade, estude primeiro: ${top}.`;
 }
