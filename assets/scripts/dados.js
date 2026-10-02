@@ -1,11 +1,36 @@
-export function renderLoading() {
-  document.getElementById("best-job").innerHTML = "<p>Carregando vagas…</p>";
+const APPLICANT_KEY = "skillmatch:applicant";
+
+export async function loadJobs() {
+  try {
+    const response = await fetch("./assets/data/vagas.json");
+
+    if (!response.ok) {
+      throw new Error(`Erro ${response.status} ao buscar o arquivo de vagas.`);
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error(error);
+    throw new Error(
+      "Não foi possível carregar as vagas. Tente novamente mais tarde.",
+    );
+  }
 }
 
-export function renderEmpty() {
-  document.getElementById("best-job").innerHTML = "<p>Nenhuma vaga encontrada.</p>";
+export function saveApplicant(applicant) {
+  localStorage.setItem(APPLICANT_KEY, JSON.stringify(applicant));
 }
 
-export function renderError(message) {
-  document.getElementById("best-job").innerHTML = `<p role="alert">${message}</p>`;
+export function getSavedApplicant() {
+  const raw = localStorage.getItem(APPLICANT_KEY);
+
+  if (raw === null) {
+    return null;
+  }
+
+  try {
+    return JSON.parse(raw);
+  } catch (error) {
+    return null;
+  }
 }
