@@ -1,3 +1,11 @@
+const saved = getSavedApplicant();
+if (saved) {
+  form.elements["name"].value = saved.name;
+  form.elements["area"].value = saved.area;
+  form.elements["skills"].value = saved.skills.join(", ");
+  form.elements["experience"].value = saved.experience;
+}
+
 import { captureProfileForm, validateForm, renderProfileCard, renderBestJob, renderLoading, renderEmpty, renderError } from "./ui.js";
 import { JobFrontEnd, jobAnalyze } from "./motor.js";
 import { loadJobs, saveApplicant } from "./dados.js";
