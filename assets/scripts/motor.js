@@ -7,6 +7,7 @@ export class Job {
     this.wage = wage;
     this.modality = modality;
   }
+
   calculateCompatibility(skills) {
     const skillsLower = skills.map((skill) => skill.toLowerCase());
     const isFound = (req) => skillsLower.includes(req.toLowerCase());
@@ -87,26 +88,36 @@ export function jobAnalyze(applicant, jobs, onComplete) {
     const { percentage, found, missing } = job.calculateCompatibility(
       applicant.skills,
     );
-    return { job, percentage, found, missing, level: classify(percentage) };
+    return {
+      job,
+      percentage,
+      found,
+      missing,
+      level: classify(percentage),
+    };
   });
 
-  const best =
-    results.length === 0
-      ? null
-      : results.reduce((top, current) => {
-          if (current.percentage > top.percentage) return current;
-          if (
-            current.percentage === top.percentage &&
-            current.missing.length < top.missing.length
-          )
-            return current;
-          return top;
-        });
+  if (results.length === 0) {
+    return { results, best: null, recommendation: "", analysisNumber: 0 };
+  }
+
+  const best = results.reduce((top, current) => {
+    if (current.percentage > top.percentage) {
+      return current;
+    }
+    if (
+      current.percentage === top.percentage &&
+      current.missing.length < top.missing.length
+    ) {
+      return current;
+    }
+    return top;
+  });
 
   const analysis = {
     results,
     best,
-    recommendation: results.length === 0 ? "" : generateRecommendation(results),
+    recommendation: generateRecommendation(results),
     analysisNumber: provideAnalysis(),
   };
 
