@@ -1,3 +1,4 @@
+
 export function captureProfileForm(form) {
   const skillsArray = form.elements["skills"].value
     .split(",")
@@ -71,22 +72,56 @@ export function validateForm(applicant) {
 
 export function renderProfileCard(applicant) {
   const container = document.getElementById("profile-card");
+  container.innerHTML = "";
 
-  container.innerHTML = `
-    <h3>${applicant.name}</h3>
-    <p>Área de interesse: ${applicant.area}</p>
-    <p>Experiência: ${applicant.experience} meses</p>
-    <p>Habilidades: ${applicant.skills.join(", ")}</p>
-  `;
+  const title = document.createElement("h3");
+  title.textContent = applicant.name;
+
+  const lines = [
+    `Área de interesse: ${applicant.area}`,
+    `Experiência: ${applicant.experience} meses`,
+    `Habilidades: ${applicant.skills.join(", ")}`,
+  ].map((text) => {
+    const p = document.createElement("p");
+    p.textContent = text;
+    return p;
+  });
+
+  container.append(title, ...lines);
+}
+
+function renderMessage(text, isAlert = false) {
+  const container = document.getElementById("best-job");
+  container.innerHTML = "";
+
+  const p = document.createElement("p");
+  if (isAlert) {
+    p.setAttribute("role", "alert");
+  }
+  p.textContent = text;
+
+  container.append(p);
 }
 
 export function renderBestJob(best) {
-  const container = document.getElementById("best-job");
-
   if (!best) {
-    container.innerHTML = "<p>Nenhuma vaga disponível para comparar.</p>";
+    renderMessage("Nenhuma vaga disponível para comparar.");
     return;
   }
 
-  container.innerHTML = `<p>Vaga mais compatível: ${best.job.label()} — ${best.percentage}%</p>`;
+  renderMessage(
+    `Vaga mais compatível: ${best.job.label()} — ${best.percentage}%`,
+  );
+}
+
+export function renderLoading() {
+  renderMessage("Carregando vagas…");
+}
+
+export function renderEmpty() {
+  renderMessage("Nenhuma vaga encontrada.");
+}
+
+export function renderError(message) {
+  renderMessage(message, true);
 }
