@@ -85,39 +85,23 @@ export function generateRecommendation(results) {
 
 export function jobAnalyze(applicant, jobs, onComplete) {
   const results = jobs.map((job) => {
-    const { percentage, found, missing } = job.calculateCompatibility(
-      applicant.skills,
-    );
-    return {
-      job,
-      percentage,
-      found,
-      missing,
-      level: classify(percentage),
-    };
+    const { percentage, found, missing } = job.calculateCompatibility(applicant.skills);
+    return { job, percentage, found, missing, level: classify(percentage) };
   });
 
-  if (results.length === 0) {
-    return { results, best: null, recommendation: "", analysisNumber: 0 };
-  }
-
-  const best = results.reduce((top, current) => {
-    if (current.percentage > top.percentage) {
-      return current;
-    }
-    if (
-      current.percentage === top.percentage &&
-      current.missing.length < top.missing.length
-    ) {
-      return current;
-    }
-    return top;
-  });
+  const best =
+    results.length === 0
+      ? null
+      : results.reduce((top, current) => {
+          if (current.percentage > top.percentage) return current;
+          if (current.percentage === top.percentage && current.missing.length < top.missing.length) return current;
+          return top;
+        });
 
   const analysis = {
     results,
     best,
-    recommendation: generateRecommendation(results),
+    recommendation: results.length === 0 ? "" : generateRecommendation(results),
     analysisNumber: provideAnalysis(),
   };
 
