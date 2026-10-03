@@ -3,10 +3,23 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Projeto Avaliativo</title>
+    <title>SkillMatch — Compatibilidade com vagas Front-End Jr.</title>
+    <meta
+      name="description"
+      content="Preencha seu perfil de habilidades e descubra sua compatibilidade com vagas de front-end júnior."
+    />
+    <link rel="stylesheet" href="./assets/styles/index.styles.css" />
   </head>
 
   <body>
+    <header class="site-header">
+      <img src="./assets/img/logo.svg" alt="SkillMatch" class="logo" />
+      <div>
+        <h1>SkillMatch</h1>
+        <p class="tagline">Compare seu perfil com vagas de front-end júnior</p>
+      </div>
+    </header>
+
     <main>
       <section id="profile" aria-labelledby="profile-title">
         <h2 id="profile-title">Seu perfil</h2>
@@ -50,13 +63,22 @@
 
           <button type="submit">Analisar a compatibilidade</button>
         </form>
+
+        <div id="profile-card"></div>
       </section>
 
-      <div id="profile-card"></div>
-      <div id="best-job"></div>
-      <div id="recommendation"></div>
-      <div id="jobs-list"></div>
+      <section id="results" aria-labelledby="results-title" aria-live="polite">
+        <h2 id="results-title">Resultado da análise</h2>
+
+        <div id="best-job"></div>
+        <div id="recommendation"></div>
+        <div id="jobs-list"></div>
+      </section>
     </main>
+
+    <footer>
+      <p>Projeto Avaliativo — Módulo 01 — SkillMatch Web</p>
+    </footer>
 
     <script type="module" src="./assets/scripts/main.js"></script>
   </body>
