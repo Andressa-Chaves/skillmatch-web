@@ -32,3 +32,27 @@ img {
   max-width: 100%;
   display: block;
 }
+
+.site-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1.25rem 1rem;
+  background-color: var(--color-primary);
+  color: #ffffff;
+}
+
+.site-header .logo {
+  width: 40px;
+  height: 40px;
+}
+
+.site-header h1 {
+  font-size: 1.5rem;
+}
+
+.site-header .tagline {
+  margin-top: 0.25rem;
+  font-size: 0.9rem;
+  color: #ffffffd9;
+}
