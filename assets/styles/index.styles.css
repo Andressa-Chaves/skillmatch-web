@@ -1,5 +1,22 @@
+:root {
+  --color-bg: #f7f7fa;
+  --color-surface: #ffffff;
+  --color-text: #1c1b29;
+  --color-text-muted: #5b5a6e;
+  --color-primary: #3d348b;
+  --color-primary-dark: #2c2566;
+  --color-border: #e1e0ea;
+
+  --color-alta: #2e7d5b;
+  --color-media: #b8860b;
+  --color-baixa: #b23a48;
+
+  --radius: 8px;
+  --spacing: 1rem;
+}
+
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
