@@ -135,3 +135,36 @@ export function renderRecommendation(text) {
 
   container.append(p);
 }
+
+export function renderJobsList(results) {
+  const container = document.getElementById("jobs-list");
+  container.innerHTML = "";
+
+  for (const result of results) {
+    const card = document.createElement("article");
+    card.classList.add("card-vaga");
+
+    const levelClass =
+      result.level === "Alta"
+        ? "compat-alta"
+        : result.level === "Média"
+          ? "compat-media"
+          : "compat-baixa";
+    card.classList.add(levelClass);
+
+    const title = document.createElement("h3");
+    title.textContent = result.job.label();
+
+    const percentage = document.createElement("p");
+    percentage.textContent = `Compatibilidade: ${result.percentage}% (${result.level})`;
+
+    const found = document.createElement("p");
+    found.textContent = `Habilidades encontradas: ${result.found.length > 0 ? result.found.join(", ") : "nenhuma"}`;
+
+    const missing = document.createElement("p");
+    missing.textContent = `Habilidades faltantes: ${result.missing.length > 0 ? result.missing.join(", ") : "nenhuma"}`;
+
+    card.append(title, percentage, found, missing);
+    container.append(card);
+  }
+}

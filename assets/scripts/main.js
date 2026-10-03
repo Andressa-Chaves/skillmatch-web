@@ -4,6 +4,7 @@ import {
   renderProfileCard,
   renderBestJob,
   renderRecommendation,
+  renderJobsList,
   renderLoading,
   renderEmpty,
   renderError,
@@ -48,6 +49,7 @@ form.addEventListener("submit", async (event) => {
     jobAnalyze(applicant, jobs, (analysis) => {
       renderBestJob(analysis.best);
       renderRecommendation(analysis.recommendation);
+      renderJobsList(analysis.results); 
     });
   } catch (error) {
     renderError(error.message);
