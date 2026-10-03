@@ -125,3 +125,13 @@ export function renderEmpty() {
 export function renderError(message) {
   renderMessage(message, true);
 }
+
+export function renderRecommendation(text) {
+  const container = document.getElementById("recommendation");
+  container.innerHTML = "";
+
+  const p = document.createElement("p");
+  p.textContent = text;
+
+  container.append(p);
+}
