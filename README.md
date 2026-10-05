@@ -122,7 +122,7 @@ O planejamento e acompanhamento das tarefas está disponível em:
 
 ## Vídeo de apresentação
 
-[LINK_DO_VIDEO]
+[LINK_DO_VIDEO] (https://drive.google.com/drive/folders/1yb_pljfOrdKZdj2_PKCa7_hOsdKNSabH?usp=sharing)
 
 ## Melhorias futuras
 
