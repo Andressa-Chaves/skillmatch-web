@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SkillMatch — Compatibilidade com vagas Front-End Jr.</title>
+    <meta
+      name="description"
+      content="Preencha seu perfil de habilidades e descubra sua compatibilidade com vagas de front-end júnior."
+    />
+    <link rel="stylesheet" href="./assets/styles/index.styles.css" />
+  </head>
+
+  <body>
+    <header class="site-header">
+      <img src="./assets/img/logo.svg" alt="SkillMatch" class="logo" />
+      <div>
+        <h1>SkillMatch</h1>
+        <p class="tagline">Compare seu perfil com vagas de front-end júnior</p>
+      </div>
+    </header>
+
+    <main>
+      <section id="profile" aria-labelledby="profile-title">
+        <h2 id="profile-title">Seu perfil</h2>
+
+        <form id="form-profile" novalidate>
+          <div class="campo">
+            <label for="name">Nome</label>
+            <input type="text" id="name" name="name" required />
+            <span class="error" id="error-name" role="alert"></span>
+          </div>
+
+          <div class="campo">
+            <label for="area">Área de interesse</label>
+            <input type="text" id="area" name="area" required />
+            <span class="error" id="error-area" role="alert"></span>
+          </div>
+
+          <div class="campo">
+            <label for="skills">Habilidades (separadas por vírgula)</label>
+            <input
+              type="text"
+              id="skills"
+              name="skills"
+              required
+              placeholder="Ex: JavaScript, HTML, CSS"
+            />
+            <span class="error" id="error-skills" role="alert"></span>
+          </div>
+
+          <div class="campo">
+            <label for="experience">Tempo de experiência (em meses)</label>
+            <input
+              type="number"
+              id="experience"
+              name="experience"
+              min="0"
+              required
+            />
+            <span class="error" id="error-experience" role="alert"></span>
+          </div>
+
+          <button type="submit">Analisar a compatibilidade</button>
+        </form>
+
+        <div id="profile-card"></div>
+      </section>
+
+      <section id="results" aria-labelledby="results-title" aria-live="polite">
+        <h2 id="results-title">Resultado da análise</h2>
+
+        <div id="best-job"></div>
+        <div id="recommendation"></div>
+        <div id="jobs-list"></div>
+      </section>
+    </main>
+
+    <footer>
+      <p>Projeto Avaliativo — Módulo 01 — SkillMatch Web</p>
+    </footer>
+
+    <script type="module" src="./assets/scripts/main.js"></script>
+  </body>
+</html>
